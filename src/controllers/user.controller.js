@@ -80,3 +80,23 @@ export const infoMe = async (req, res) => {
     });
   }
 };
+
+export const listUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+    if (!users || users.length === 0) {
+      return res.status(404).json({
+        message: "Không tìm thấy người dùng nào!",
+      });
+    }
+    return res.status(200).json({
+      message: "Danh sách người dùng!",
+      data: users,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "lỗi không tìm thấy dữ liệu!",
+      error: error.message,
+    })
+  }
+}
