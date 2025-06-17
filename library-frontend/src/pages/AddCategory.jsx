@@ -17,20 +17,22 @@ const AddCategory = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-4">
-      <h2 className="text-xl font-bold mb-4">Thêm danh mục mới</h2>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Tên danh mục"
-        required
-        className="w-full p-2 border mb-4 rounded"
-      />
-      <button
-        type="submit"
-        className="bg-green-600 hover:bg-green-700 text-white p-2 rounded w-full"
-      >
+    <form onSubmit={handleSubmit} className="form form-category">
+      <h2 className="title-category">Thêm danh mục mới</h2>
+      <div className="form-category-input">
+        <label className="title-input" htmlFor="">
+          Nhập tên danh mục
+        </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Tên danh mục"
+          required
+          className="input input-name"
+        />
+      </div>
+      <button type="submit" className="btn btn-submit-category">
         Thêm danh mục
       </button>
     </form>

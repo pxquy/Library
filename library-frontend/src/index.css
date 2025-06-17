@@ -1,3 +1,167 @@
 body {
   font-family: Arial, sans-serif;
 }
+
+/* HEADER */
+.container-header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .title-header {
+    color: green;
+  }
+
+  .container-nav {
+    display: flex;
+    gap: 25px;
+    margin-right: 20px;
+  }
+
+  .li {
+    text-decoration: none;
+    color: #111;
+    font-weight: 600;
+  }
+
+  .li:hover {
+    color: rgb(3, 201, 3);
+  }
+}
+
+/* REGISTER */
+.form {
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 15px;
+  box-shadow: 0 0 5px #111;
+  text-align: center;
+
+  .title-register {
+    color: #c00;
+    padding: 15px;
+  }
+
+  .form-login-input,
+  .form-register-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+
+    .title-input {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    .input {
+      width: 600px;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      box-shadow: inset 0 0 4px #111;
+    }
+
+    input::placeholder {
+      color: #c00;
+    }
+
+    input:focus {
+      outline: none;
+    }
+  }
+
+  .btn-submit {
+    padding: 8px;
+    width: 100px;
+    margin: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: green;
+    color: rgb(185, 182, 182);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-submit:hover {
+    background-color: rgb(3, 129, 3);
+    box-shadow: inset 0 0 3px #fff;
+    color: #fff;
+  }
+
+  .link-ref {
+    margin: 10px;
+    padding-bottom: 15px;
+
+    .a-link {
+      padding: 10px;
+      text-decoration: none;
+      color: green;
+      font-weight: 600;
+    }
+
+    .a-link:hover {
+      color: rgb(3, 150, 3);
+    }
+  }
+}
+
+/* CATEGORY */
+.title-category {
+  padding-top: 15px;
+  color: rgb(5, 120, 93);
+}
+.form-category-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  .title-input {
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .input {
+    width: 600px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: inset 0 0 4px #111;
+  }
+
+  input::placeholder {
+    color: #c00;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
+.btn-submit-category {
+  width: 200px;
+  padding: 8px;
+  margin: 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(4, 123, 115);
+  color: rgb(185, 182, 182);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-submit-category:hover {
+  background-color: rgb(5, 120, 93);
+  box-shadow: inset 0 0 3px #fff;
+  color: #fff;
+}
+
+/* LOGIN */
+.title-login {
+  padding-top: 15px;
+  color: green;
+}

@@ -3,13 +3,24 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header>
-      <h1>📚 Library</h1>
-      <nav>
-        <Link to="/">Trang chủ</Link> |{" "}
-        <Link to="/categories">Danh mục</Link> |{" "}
-        <Link to="/add-book">Thêm sách</Link> |{" "}
-        <Link to="/add-category">Thêm danh mục</Link>
+    <header className="container-header">
+      <h1 className="title-header">📚 Library</h1>
+      <nav className="container-nav">
+        <Link className="li li-home" to="/">
+          Trang chủ
+        </Link>{" "}
+        |{" "}
+        <Link className="li li-category" to="/categories">
+          Danh mục
+        </Link>{" "}
+        |{" "}
+        <Link className="li li-add-book" to="/add-book">
+          Thêm sách
+        </Link>{" "}
+        |{" "}
+        <Link className="li li-add-category" to="/add-category">
+          Thêm danh mục
+        </Link>
       </nav>
     </header>
   );
