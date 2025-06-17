@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import router from "./routers";
 import { connectDB } from "./config/database";
 
@@ -7,12 +8,18 @@ dotenv.config();
 
 connectDB();
 
-const add = express();
+const app = express();
 
-add.use(express.json());
+// ✅ THÊM dòng này để cho phép truy cập từ frontend
+app.use(cors({
+  origin: "http://localhost:5173", // hoặc "*" nếu bạn muốn mở cho tất cả
+  credentials: true
+}));
 
-add.use("/api", router);
+app.use(express.json());
 
-add.listen(process.env.PORT, () => {
-  console.log(`Kết nối thành công tới sever ${process.env.PORT}`);
+app.use("/api", router);
+
+app.listen(process.env.PORT, () => {
+  console.log(`✅ Kết nối thành công tới server ${process.env.PORT}`);
 });
