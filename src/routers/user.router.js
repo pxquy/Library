@@ -14,6 +14,7 @@ router.use(verifyJWT);
 router.use(recheckTo("admin", "user"));
 router.get("/me", infoMe);
 router.get("/list", listUsers)
-router.get("/update", validateRequest(validateUser), updateUser);
+router.get("/update/:id", validateRequest(validateUser), updateUser);
+
 
 export default router; 

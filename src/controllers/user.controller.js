@@ -83,12 +83,29 @@ export const infoMe = async (req, res) => {
 
 export const listUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
+    const { page = 1, limit = 10, _search = "name", _keyword = "" } = req.query;
+    const options = {
+      page: parseInt(page), // Đổi kiểu dữ liệu cảu page về số nguyên
+      limit: parseInt(limit), // Đổi kiểu dữ liệu của limit về số nguyên
+    }
+
+    const loaded =
+      _search != "" && _keyword != ""
+        ? { [_search]: { $regex: _keyword, $options: "" } }
+        : {}
+    //$regex dùng để tìm kiếm chuỗi trong MongoDB
+    // $options: "i" để tìm kiếm không phân biệt chữ hoa chữ thường
+    // $options: "m" để tìm kiếm nhiều dòng
+
+    // req.body: Lấy dữ liệu từ form của người dùng gửi lên server
+    // req.query: Lấy dữ liệu từ URL sau dấu ?
+    const users = await User.paginate(loaded, options);
     if (!users || users.length === 0) {
       return res.status(404).json({
         message: "Không tìm thấy người dùng nào!",
       });
     }
+    users.password = undefined; // Ẩn mật khẩu của người dùng
     return res.status(200).json({
       message: "Danh sách người dùng!",
       data: users,
@@ -100,7 +117,6 @@ export const listUsers = async (req, res) => {
     })
   }
 }
-
 
 export const updateUser = async (req, res) => {
   try {
