@@ -100,3 +100,22 @@ export const listUsers = async (req, res) => {
     })
   }
 }
+
+
+export const updateUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!user) {
+      return res.status(404).json({
+        message: "Không tìm thấy người dùng cần nhập!",
+      });
+    }
+    return res.status(200).json({
+      message: "Cập nhập người dùng thành công!",
+      data: user,
+    })
+
+  } catch (error) {
+
+  }
+}
