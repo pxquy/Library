@@ -7,7 +7,7 @@ const bookSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, "Tên sách bắt buộc nhập!"],
-      minlength: [200, "Tên sản phẩm tối đa 200 ký tự!"],
+      minlength: [0, "Tên sản phẩm tối đa 200 ký tự!"],
       lowercase: true,
     },
     price: {
