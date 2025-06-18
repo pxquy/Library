@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import axiosClient from "../utils/axiosClient";
+import { useNavigate } from "react-router-dom"; // 👉 thêm dòng này
 
 const AddCategory = () => {
   const [name, setName] = useState("");
+  const navigate = useNavigate(); // 👉 khởi tạo hook điều hướng
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axiosClient.post("/categories", { name });
       alert("✅ Thêm danh mục thành công!");
-      setName("");
+      navigate("/categories"); // 👉 chuyển đến danh sách danh mục
     } catch (err) {
       console.error("❌ Lỗi:", err.response?.data || err.message);
       alert("Thêm danh mục thất bại!");

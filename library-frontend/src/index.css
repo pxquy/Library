@@ -165,3 +165,49 @@ body {
   padding-top: 15px;
   color: green;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SEARCH BAR TRONG HEADER */
+.search-bar {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-form input[type="text"],
+.search-form input[type="number"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+}
+
+.search-form input:focus {
+  border-color: green;
+  outline: none;
+}
+
+.search-form button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: rgb(3, 129, 3);
+}

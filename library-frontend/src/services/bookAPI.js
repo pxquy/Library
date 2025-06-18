@@ -1,13 +1,11 @@
-import axios from "axios";
-
-const API = "http://localhost:3000/api/books"; // điều chỉnh lại nếu cần
+import axiosClient from "../utils/axiosClient";
 
 export const getBooks = async () => {
-  const res = await axios.get(API);
+  const res = await axiosClient.get("/books");
   return res.data;
 };
 
 export const getBookById = async (id) => {
-  const res = await axios.get(`${API}/${id}`);
+  const res = await axiosClient.get(`/books/${id}`);
   return res.data;
 };
