@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axiosClient from "../utils/axiosClient"; // Đảm bảo file này có gửi token
+import axiosClient from "../utils/axiosClient";
 import { useNavigate } from "react-router-dom";
-
 
 const AddBook = () => {
   const [book, setBook] = useState({
@@ -12,13 +11,13 @@ const AddBook = () => {
     author: "",
     category: "",
   });
-const navigate = useNavigate();
+
+  const navigate = useNavigate();
 
   const [authors, setAuthors] = useState([]);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Load tác giả
     axiosClient
       .get("/author")
       .then((res) => {
@@ -31,7 +30,6 @@ const navigate = useNavigate();
         alert("Bạn cần đăng nhập bằng tài khoản admin để tải tác giả");
       });
 
-    // Load danh mục
     axiosClient
       .get("/categories")
       .then((res) => {
@@ -48,122 +46,133 @@ const navigate = useNavigate();
   const handleChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
   };
-const handleSubmit = async (e) => {
-  e.preventDefault();
 
-  try {
-    const { name, price, description, date, category, author } = book;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // Gửi đủ 3 trường như backend yêu cầu
-    const authorRes = await axiosClient.post("/author", {
-      name: author,
-      age: 30,
-      numberPhone: 1234567890, // ví dụ giả định
-    });
+    try {
+      const { name, price, description, date, category, author } = book;
 
-    const authorId = authorRes.data.createAuthor._id;
+      const authorRes = await axiosClient.post("/author", {
+        name: author,
+        age: 30,
+        numberPhone: 1234567890,
+      });
 
-    const newBook = {
-      name,
-      price,
-      description,
-      date,
-      category,
-      author: authorId,
-    };
+      const authorId = authorRes.data.createAuthor._id;
 
-    await axiosClient.post("/books", newBook);
+      const newBook = {
+        name,
+        price,
+        description,
+        date,
+        category,
+        author: authorId,
+      };
 
-    alert("✅ Thêm sách thành công!");
-    
-    setBook({
-      name: "",
-      price: "",
-      description: "",
-      date: "",
-      author: "",
-      category: "",
-    });
-    navigate("/");
+      await axiosClient.post("/books", newBook);
 
-  } catch (err) {
-    console.error("❌ Lỗi thêm sách:", err.response?.data || err.message);
-    alert("❌ Thêm sách thất bại: " + (err.response?.data?.message || "Lỗi không xác định"));
-  }
-};
+      alert("✅ Thêm sách thành công!");
+
+      setBook({
+        name: "",
+        price: "",
+        description: "",
+        date: "",
+        author: "",
+        category: "",
+      });
+
+      navigate("/");
+    } catch (err) {
+      console.error("❌ Lỗi thêm sách:", err.response?.data || err.message);
+      alert(
+        "❌ Thêm sách thất bại: " +
+          (err.response?.data?.message || "Lỗi không xác định")
+      );
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Thêm sách</h2>
+    <form onSubmit={handleSubmit} className="form form-add-book">
+      <h2 className="title-add-book">Thêm sách</h2>
 
-      <input
-        type="text"
-        name="name"
-        value={book.name}
-        placeholder="Tên sách"
-        onChange={handleChange}
-        required
-        maxLength={200} // 👈 GIỚI HẠN SỐ KÝ TỰ
-        className="w-full mb-3 p-2 border rounded"
-      />
+      <div className="form-group">
+        <input
+          type="text"
+          name="name"
+          value={book.name}
+          placeholder="Tên sách"
+          onChange={handleChange}
+          required
+          maxLength={200}
+          className="input"
+        />
+      </div>
 
-      <input
-        type="number"
-        name="price"
-        value={book.price}
-        placeholder="Giá"
-        onChange={handleChange}
-        required
-        className="w-full mb-3 p-2 border rounded"
-      />
+      <div className="form-group">
+        <input
+          type="number"
+          name="price"
+          value={book.price}
+          placeholder="Giá"
+          onChange={handleChange}
+          required
+          className="input"
+        />
+      </div>
 
-      <textarea
-        name="description"
-        value={book.description}
-        placeholder="Mô tả"
-        onChange={handleChange}
-        className="w-full mb-3 p-2 border rounded"
-      />
+      <div className="form-group">
+        <textarea
+          name="description"
+          value={book.description}
+          placeholder="Mô tả"
+          onChange={handleChange}
+          className="textarea"
+        />
+      </div>
 
-      <input
-        type="text"
-        name="date"
-        value={book.date}
-        placeholder="Ngày xuất bản"
-        onChange={handleChange}
-        className="w-full mb-3 p-2 border rounded"
-      />
+      <div className="form-group">
+        <input
+          type="text"
+          name="date"
+          value={book.date}
+          placeholder="Ngày xuất bản"
+          onChange={handleChange}
+          className="input"
+        />
+      </div>
 
-      <input
-  type="text"
-  name="author"
-  value={book.author}
-  onChange={handleChange}
-  placeholder="Tên tác giả"
-  required
-  className="w-full mb-3 p-2 border rounded"
-/>
+      <div className="form-group">
+        <input
+          type="text"
+          name="author"
+          value={book.author}
+          onChange={handleChange}
+          placeholder="Tên tác giả"
+          required
+          className="input"
+        />
+      </div>
 
+      <div className="form-group">
+        <select
+          name="category"
+          value={book.category}
+          onChange={handleChange}
+          required
+          className="select"
+        >
+          <option value="">Chọn danh mục</option>
+          {categories.map((c) => (
+            <option key={c._id} value={c._id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <select
-        name="category"
-        value={book.category}
-        onChange={handleChange}
-        required
-        className="w-full mb-3 p-2 border rounded"
-      >
-        <option value="">Chọn danh mục</option>
-        {categories.map((c) => (
-          <option key={c._id} value={c._id}>
-            {c.name}
-          </option>
-        ))}
-      </select>
-
-      <button
-        type="submit"
-        className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded w-full"
-      >
+      <button type="submit" className="btn-submit-book">
         Thêm sách
       </button>
     </form>
